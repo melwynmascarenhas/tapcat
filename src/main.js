@@ -32,21 +32,30 @@ Swiper.use([
   Parallax,
 ])
 
+window.onload = function () {
+  document.body.style.overflow = 'hidden'
+}
+
+function enableScrolling() {
+  // Enable scrolling after the delay
+  document.body.style.overflowY = 'auto'
+  const lenis = new Lenis()
+
+  lenis.on('scroll', (e) => {
+    console.log(e)
+  })
+
+  lenis.on('scroll', ScrollTrigger.update)
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000)
+  })
+
+  gsap.ticker.lagSmoothing(0)
+}
 //LENIS SCROLL
-const lenis = new Lenis()
 
-lenis.on('scroll', (e) => {
-  console.log(e)
-})
-
-lenis.on('scroll', ScrollTrigger.update)
-
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000)
-})
-
-gsap.ticker.lagSmoothing(0)
-//
+// //
 
 const preloaderTL = gsap.timeline()
 // GIVE UNIQUE IDS TO EACH FILTER
@@ -122,6 +131,7 @@ preloaderTL
     {
       attr: { stdDeviation: 0 },
       duration: 2,
+      onComplete: enableScrolling,
     },
     '>-1'
   )
