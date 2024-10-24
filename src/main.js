@@ -32,6 +32,7 @@ Swiper.use([
   Parallax,
 ])
 
+//LENIS SCROLL
 window.onload = function () {
   document.body.style.overflow = 'hidden'
 }
@@ -53,7 +54,6 @@ function enableScrolling() {
 
   gsap.ticker.lagSmoothing(0)
 }
-//LENIS SCROLL
 
 // //
 
