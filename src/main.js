@@ -35,6 +35,87 @@ Swiper.use([
 //LENIS SCROLL
 window.onload = function () {
   document.body.style.overflow = 'hidden'
+
+  //PRELOADER
+
+  const preloaderTL = gsap.timeline()
+  // GIVE UNIQUE IDS TO EACH FILTER
+  document.querySelectorAll('.svg-filter').forEach(function (element, index) {
+    element.parentElement.style.filter = 'url(#svg-filter-' + index + ')'
+    element.querySelector('filter').setAttribute('id', 'svg-filter-' + index)
+  })
+
+  let loaderBg = document.querySelector('.loader-bg')
+  let loadGrid = document.querySelector('.load-grid')
+
+  let sceneWrap = document.querySelector('.scene-wrap-coin')
+  let splineFilter = sceneWrap.querySelector('.svg-filter')
+
+  gsap.set(splineFilter.querySelector('[baseFrequency]'), {
+    attr: { baseFrequency: 0.9 },
+  })
+  gsap.set(splineFilter.querySelector('[scale]'), { attr: { scale: 2000 } })
+
+  // on cover text
+  let coverText = document.querySelector('.cover-text')
+  let coverFilter = coverText.querySelector('.svg-filter')
+
+  //PRELOADER TIMELINE
+
+  const numberElement = document.querySelector('.number')
+  let counter = 0
+  const duration = 2500 // 4 seconds
+  const interval = duration / 100 // interval for each increment
+
+  function updateCount() {
+    const updateCounter = setInterval(() => {
+      counter++
+      numberElement.textContent = counter
+      if (counter === 100) {
+        clearInterval(updateCounter)
+      }
+    }, interval)
+  }
+
+  preloaderTL
+    .to('svg rect', {
+      duration: 3,
+      width: '100%', // Animate the width to cover the SVG
+      ease: 'power1.inOut',
+      onStart: updateCount,
+    })
+    .to(['.loader-wrap', '.status-wrap'], {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power1.inOut',
+    })
+    .to(loaderBg, {
+      opacity: 0,
+      duration: 3,
+    })
+    .to(
+      loadGrid,
+      {
+        opacity: 0,
+        duration: 3,
+      },
+      '<+1'
+    )
+    .to(
+      splineFilter.querySelector('[scale]'),
+      { attr: { scale: 0 }, duration: 3 },
+      '<-1'
+    )
+    .fromTo(
+      coverFilter.querySelector('[stdDeviation]'),
+      { attr: { stdDeviation: 100 } },
+      {
+        attr: { stdDeviation: 0 },
+        duration: 2,
+        onComplete: enableScrolling,
+      },
+      '>-1'
+    )
 }
 
 function enableScrolling() {
@@ -56,85 +137,6 @@ function enableScrolling() {
 }
 
 // //
-
-const preloaderTL = gsap.timeline()
-// GIVE UNIQUE IDS TO EACH FILTER
-document.querySelectorAll('.svg-filter').forEach(function (element, index) {
-  element.parentElement.style.filter = 'url(#svg-filter-' + index + ')'
-  element.querySelector('filter').setAttribute('id', 'svg-filter-' + index)
-})
-
-let loaderBg = document.querySelector('.loader-bg')
-let loadGrid = document.querySelector('.load-grid')
-
-let sceneWrap = document.querySelector('.scene-wrap-coin')
-let splineFilter = sceneWrap.querySelector('.svg-filter')
-
-gsap.set(splineFilter.querySelector('[baseFrequency]'), {
-  attr: { baseFrequency: 0.9 },
-})
-gsap.set(splineFilter.querySelector('[scale]'), { attr: { scale: 2000 } })
-
-// on cover text
-let coverText = document.querySelector('.cover-text')
-let coverFilter = coverText.querySelector('.svg-filter')
-
-//PRELOADER TIMELINE
-
-const numberElement = document.querySelector('.number')
-let counter = 0
-const duration = 2500 // 4 seconds
-const interval = duration / 100 // interval for each increment
-
-function updateCount() {
-  const updateCounter = setInterval(() => {
-    counter++
-    numberElement.textContent = counter
-    if (counter === 100) {
-      clearInterval(updateCounter)
-    }
-  }, interval)
-}
-
-preloaderTL
-  .to('svg rect', {
-    duration: 3,
-    width: '100%', // Animate the width to cover the SVG
-    ease: 'power1.inOut',
-    onStart: updateCount,
-  })
-  .to(['.loader-wrap', '.status-wrap'], {
-    opacity: 0,
-    duration: 0.5,
-    ease: 'power1.inOut',
-  })
-  .to(loaderBg, {
-    opacity: 0,
-    duration: 3,
-  })
-  .to(
-    loadGrid,
-    {
-      opacity: 0,
-      duration: 3,
-    },
-    '<+1'
-  )
-  .to(
-    splineFilter.querySelector('[scale]'),
-    { attr: { scale: 0 }, duration: 3 },
-    '<-1'
-  )
-  .fromTo(
-    coverFilter.querySelector('[stdDeviation]'),
-    { attr: { stdDeviation: 100 } },
-    {
-      attr: { stdDeviation: 0 },
-      duration: 2,
-      onComplete: enableScrolling,
-    },
-    '>-1'
-  )
 
 //menu nav links code
 let menuWrap = document.querySelector('.menu_wrap')
