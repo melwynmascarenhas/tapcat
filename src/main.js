@@ -460,16 +460,14 @@ const imagewrappers = document.querySelectorAll('.image-container')
 imagewrappers.forEach((item) => {
   let image = item.querySelector('.image-move')
   gsap.to(image, {
-    bottom: '-10%',
+    bottom: '-20%',
     ease: 'none',
     scrollTrigger: {
       trigger: item,
       start: 'top bottom',
       end: 'bottom top',
       scrub: true,
-      // markers: true,
+      //markers: true,
     },
   })
 })
-
-window.alert('scds')
