@@ -48,7 +48,7 @@ window.onload = function () {
   let loaderBg = document.querySelector('.loader-bg')
   let loadGrid = document.querySelector('.load-grid')
 
-  let sceneWrap = document.querySelector('.scene-wrap-coin')
+  let sceneWrap = document.querySelector('.hero_coin-spline-wrap')
   let splineFilter = sceneWrap.querySelector('.svg-filter')
 
   gsap.set(splineFilter.querySelector('[baseFrequency]'), {
