@@ -171,9 +171,9 @@ closeIcon.addEventListener('click', hideMenu)
 //menu nav links code ends
 
 //  feature swiper hover blur
-let element = document.querySelector('.feature-text')
+let element = document.querySelector('.feature_slide')
 let svg = element.querySelector('.svg-filter')
-let glow = document.querySelector('.key-features .glow')
+let glow = document.querySelector('.is-features .glow')
 
 let tl = gsap.timeline({
   paused: true,
@@ -200,7 +200,7 @@ bulletWrapper.style.borderRadius = '100vw'
 bulletWrapper.style.overflow = 'hidden'
 
 //TEXT SLIDER
-const textslider = new Swiper('.swiper_titles', {
+const textslider = new Swiper('.features_swiper', {
   slidesPerView: 1,
   speed: 1000,
   loop: true,
