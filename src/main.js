@@ -302,7 +302,7 @@ document
   })
 
 // Initialize bgSwiper
-const bgSwiper = new Swiper('.about-text', {
+const bgSwiper = new Swiper('.is-gallery-text', {
   slidesPerView: 1,
   loop: true,
   effect: 'fade',
