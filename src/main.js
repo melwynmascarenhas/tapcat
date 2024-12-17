@@ -57,7 +57,7 @@ window.onload = function () {
   gsap.set(splineFilter.querySelector('[scale]'), { attr: { scale: 2000 } })
 
   // on cover text
-  let coverText = document.querySelector('.about_text-wrap')
+  let coverText = document.querySelector('.hero_text-wrap')
   let coverFilter = coverText.querySelector('.svg-filter')
 
   //PRELOADER TIMELINE
