@@ -57,7 +57,7 @@ window.onload = function () {
   gsap.set(splineFilter.querySelector('[scale]'), { attr: { scale: 2000 } })
 
   // on cover text
-  let coverText = document.querySelector('.hero_text-wrap')
+  let coverText = document.querySelector('.about_text-wrap')
   let coverFilter = coverText.querySelector('.svg-filter')
 
   //PRELOADER TIMELINE
@@ -302,7 +302,7 @@ document
   })
 
 // Initialize bgSwiper
-const bgSwiper = new Swiper('.is-gallery-text', {
+const bgSwiper = new Swiper('.about-text', {
   slidesPerView: 1,
   loop: true,
   effect: 'fade',
