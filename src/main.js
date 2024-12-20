@@ -35,15 +35,7 @@ Swiper.use([
 //LENIS SCROLL
 window.onload = function () {
   document.body.style.overflow = 'hidden'
-  const lenis = new Lenis()
 
-  lenis.on('scroll', ScrollTrigger.update)
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000)
-  })
-
-  gsap.ticker.lagSmoothing(0)
   //PRELOADER
 
   const preloaderTL = gsap.timeline()
@@ -129,6 +121,15 @@ window.onload = function () {
 function enableScrolling() {
   // Enable scrolling after the delay
   document.body.style.overflowY = 'auto'
+  const lenis = new Lenis()
+
+  lenis.on('scroll', ScrollTrigger.update)
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000)
+  })
+
+  gsap.ticker.lagSmoothing(0)
 }
 
 // //
@@ -283,6 +284,7 @@ document
       scrollTrigger: {
         trigger: element,
         start: 'top bottom',
+        toggleActions: 'none play none reset',
       },
     })
 
