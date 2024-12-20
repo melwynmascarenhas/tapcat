@@ -35,7 +35,15 @@ Swiper.use([
 //LENIS SCROLL
 window.onload = function () {
   document.body.style.overflow = 'hidden'
+  const lenis = new Lenis()
 
+  lenis.on('scroll', ScrollTrigger.update)
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000)
+  })
+
+  gsap.ticker.lagSmoothing(0)
   //PRELOADER
 
   const preloaderTL = gsap.timeline()
@@ -121,19 +129,6 @@ window.onload = function () {
 function enableScrolling() {
   // Enable scrolling after the delay
   document.body.style.overflowY = 'auto'
-  const lenis = new Lenis()
-
-  lenis.on('scroll', (e) => {
-    console.log(e)
-  })
-
-  lenis.on('scroll', ScrollTrigger.update)
-
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000)
-  })
-
-  gsap.ticker.lagSmoothing(0)
 }
 
 // //
@@ -286,23 +281,20 @@ document
 
     let tl = gsap.timeline({
       scrollTrigger: {
-        scrub: true,
         trigger: element,
         start: 'top bottom',
-        end: 'top 50%',
-        toggleActions: 'none play none reset',
       },
     })
 
     tl.fromTo(
       svg.querySelector('[stdDeviation]'),
-      { attr: { stdDeviation: 7 } },
-      { attr: { stdDeviation: 0 } }
+      { attr: { stdDeviation: 100 } },
+      { attr: { stdDeviation: 0 }, duration: 0.3, ease: 'power1.out' }
     )
   })
 
 // Initialize bgSwiper
-const bgSwiper = new Swiper('.about-text', {
+const bgSwiper = new Swiper('.is-gallery-text', {
   slidesPerView: 1,
   loop: true,
   effect: 'fade',
@@ -454,20 +446,3 @@ gsap.fromTo(
     },
   }
 )
-
-//PROJ IMAGES PARALLAX
-const imagewrappers = document.querySelectorAll('.image-container')
-imagewrappers.forEach((item) => {
-  let image = item.querySelector('.image-move')
-  gsap.to(image, {
-    bottom: '-20%',
-    ease: 'none',
-    scrollTrigger: {
-      trigger: item,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: true,
-      //markers: true,
-    },
-  })
-})
