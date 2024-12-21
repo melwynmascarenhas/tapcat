@@ -284,7 +284,6 @@ document
       scrollTrigger: {
         trigger: element,
         start: 'top bottom',
-        toggleActions: 'play none none reset',
       },
     })
 
